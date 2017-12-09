@@ -17,14 +17,25 @@ def weight(node):
         total += memo[child]
     return total
 
-def find_balanced(node):
-    w = list(map(weight, children_of(node)))
-    s = set(w)
-    print(w, s)
-    if len(s) == 1:
-        return node
-    val = s.pop()
-    return val if w.count(val) == 1 else s.pop()
+def children_weights(node):
+    return list(map(weight, children_of(node)))
+
+def is_balanced(node):
+    return len(set(children_weights(node))) <= 1
+
+def find_unbalanced(node):
+    for child in children_of(node):
+        if not is_balanced(child):
+            return find_unbalanced(child)
+    return node
+
+def find_supposed_weight(node):
+    s = set(children_weights(node))
+    m = max(s)
+    diff = abs(s.pop() - s.pop())
+    for child in children_of(node):
+        if weight(child) == m:
+            return weights[child] - diff
 
 for line in open('input'):
     arr = line.split()
@@ -36,7 +47,5 @@ for line in open('input'):
             parenthood.add( (arr[0], child.strip(",")) )
 
 print("Bottom is {}".format(parents - children))
-print(children_of("bpvhwhh"))
-print(weights["bpvhwhh"])
-print(weight("bpvhwhh"))
-balanced("bpvhwhh")
+unbalanced = find_unbalanced("bpvhwhh")
+print(find_supposed_weight(unbalanced))
