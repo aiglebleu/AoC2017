@@ -5,11 +5,18 @@ s = "892195969991735837915273868729548694237967495115412399373194562526947585337
 old_c = ""
 total = 0
 for c in s:
-	if old_c is not "" and old_c is c:
-		total += int(c)
-	old_c = c
+    if old_c is not "" and old_c is c:
+        total += int(c)
+    old_c = c
 
 if s[0] is s[len(s) - 1]:
-	total += int(s[0])
+    total += int(s[0])
 
-print(total)
+print("P1: ", total)
+
+total = 0
+for i in range(len(s)):
+    if s[i] == s[int(i + len(s) / 2) % len(s)]:
+        total += int(s[i])
+
+print("P2: ", total)
