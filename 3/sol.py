@@ -47,3 +47,5 @@ p = get_top_left(num)
 p = walk_from_top_left(p)
 print(p)
 print(get_dist(p, Point(0, 0, 1)))
+
+# P2: https://oeis.org/A141481/b141481.txt
