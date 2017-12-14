@@ -1,23 +1,18 @@
 #!/usr/bin/env python3
 
-lines = []
+def compute(P2 = False):
+    count = 0
+    lines = [int(line) for line in open('input')]
+    index = lines[0]
+    while index >= 0 and index < len(lines):
+        offset = lines[index]
+        if P2 and lines[index] >= 3:
+            lines[index] -= 1
+        else:
+            lines[index] += 1
+        index += offset
+        count += 1
+    return count
 
-for line in open('input'):
-    line = line.strip()
-    lines.append(int(line))
-
-index = lines[0]
-count = 0
-
-#print(lines)
-
-while index >= 0 and index < len(lines):
-    #print("{} => {}".format(count, index))
-    offset = lines[index]
-    lines[index] += 1
-    index += offset
-    #print("jumping to {} (offset {})".format(index, offset))
-    count += 1
-
-print(count)
-
+print("P1: ", compute())
+print("P2: ", compute(True))
