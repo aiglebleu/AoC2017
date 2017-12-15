@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 
 banks = tuple([int(x) for x in open('input').readline().split()])
+states = {}
 
-states = set()
-
-while True:
-    if banks in states:
-        break
-    states.add(banks)
+while banks not in states:
+    states[banks] = len(states)
     highest_index = banks.index(max(banks))
     count = banks[highest_index]
     banks = list(banks)
@@ -19,4 +16,5 @@ while True:
         i += 1
     banks = tuple(banks)
 
-print(len(states))
+print("P1: ", len(states))
+print("P2: ", len(states) - states[banks])
